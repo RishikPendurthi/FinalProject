@@ -1,0 +1,75 @@
+* Learning Management System
+
+## Project Overview
+With the help of this Project, teachers can create and manage classes, and 
+students can register and track their progress. The system's goal is to 
+make creating courses and monitoring student progress simple, effective, 
+and available from any device with internet access. A platform that allows course management, student enrollment, and 
+tracking in one place is highly helpful given the growth of online learning. 
+With actual-time progress tracking and less paperwork, the application 
+will improve the experience for both teachers and students while 
+developing learning outcomes.
+
+## Steps to Set Up and Run the Code
+
+1. Install Dependencies and set up flask:
+  
+   pip install -r requirements.txt
+
+2. Set Up the Database:
+   The application uses SQLite. Ensure the `courses.db` file is created by running the app for the first time:
+   bash
+   python app.py
+   
+   This will initialize the database and create the necessary tables.
+
+4. **Run the Application**:
+   ```bash
+   python app.py
+   ```
+   The application will start on `http://127.0.0.1:5000/` by default.
+
+5. **Access the Application**:
+   Open your web browser and navigate to `http://127.0.0.1:5000/` to use the application.
+
+## Dependencies and Prerequisites
+
+### Prerequisites
+- Python 3.8 or higher
+- SQLite (pre-installed with Python)
+
+### Dependencies
+The required Python libraries are listed in `requirements.txt`. Key dependencies include:
+- Flask: Web framework for building the application.
+- Peewee: Lightweight ORM for database operations.
+- Werkzeug: For password hashing and secure session management.
+
+Install all dependencies using:
+```bash
+pip install -r requirements.txt
+```
+
+## Explanation of the Main Files
+
+### `app.py`
+The core file of the application containing:
+- Route definitions for handling HTTP requests.
+- Models for `Course`, `Student`, and `Enrollment` using Peewee ORM.
+- Business logic for authentication, course management, and progress tracking.
+
+### `templates/`
+Directory containing HTML templates for rendering the web pages. Key templates include:
+- `index.html`: Displays the list of courses.
+- `create_course.html`: Form for instructors to create new courses.
+- `course_detail.html`: Displays course details and enrolled students.
+- `register.html` and `login.html`: Forms for student registration and login.
+
+### `requirements.txt`
+Lists all Python dependencies required for the project.
+
+### `courses.db`
+SQLite database file storing data for courses, students, and enrollments. This file is generated automatically when the app is run for the first time.
+
+---
+
+For any questions or contributions, feel free to reach out or submit a pull request!
