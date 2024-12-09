@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #34495e;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        li a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .auth-links {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Online Courses</h1>
+    <h2>Courses</h2>
+    <ul>
+        {% for course in courses %}
+        <li><a href="{{ url_for('course_detail', course_id=course.id) }}">{{ course.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('create_course') }}">Create a new course</a>
+    <br>
+    <div class="auth-links">
+        {% if session.student_id %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
+</body>
+</html>

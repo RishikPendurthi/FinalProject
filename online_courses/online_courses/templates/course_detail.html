@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2, h3 {
+            color: #34495e;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #ecf0f1;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        form {
+            margin-top: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    
+    <h2>Students Enrolled</h2>
+    <ul>
+        {% for enrollment in students %}
+        <li>{{ enrollment.student.name }} - Progress: {{ enrollment.progress }}%</li>
+        {% endfor %}
+    </ul>
+
+    {% if current_student %}
+    <form action="{{ url_for('enroll', course_id=course.id) }}" method="POST">
+        <button type="submit">Enroll</button>
+    </form>
+
+    <h3>Track Progress</h3>
+    {% for enrollment in students %}
+        {% if enrollment.student.id == current_student.id %}
+        <form method="POST" action="{{ url_for('track_progress', enrollment_id=enrollment.id) }}">
+            <label for="progress">Progress:</label>
+            <input type="number" name="progress" min="0" max="100" value="{{ enrollment.progress }}">
+            <button type="submit">Update Progress</button>
+        </form>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    
+    <br>
+    <a href="{{ url_for('index') }}">Back to Courses</a>
+</body>
+</html>
